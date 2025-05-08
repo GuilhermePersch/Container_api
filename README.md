@@ -15,42 +15,50 @@ Para o professor Hugo, atividade realizada em aula no dia 0
 
 ## Como rodar o projeto
 
-1. Clone o repositório:
+Clonar o repositório: ->
 
 bash
 git clone https://github.com/GuilhermePersch/container_api.git
-cd seu-repositorio
 
+
+Encontrar na pasta:
+cd container2
+
+Buildar a imagem:
 docker-compose up --build
 
-http://localhost:8080
+Testar o localhost:
+http://localhost:8080/index.php/motos
 
 # EndPoints liberados:
 
 🔹 Listar todas as motos
-GET /motos
+GET http://localhost:8080/index.php/motos
 Retorna todas as motos cadastradas.
 
 🔹 Cadastrar nova moto
-POST /motos
+POST http://localhost:8080/index.php/motos
 
 JSON Exemplo:
 
-json
-Copiar
-Editar
+json para copiar e editar
+
+
 {
   "modelo": "CB 500F",
   "marca": "Honda",
   "ano": 2021,
   "preco": 35000
 }
+
+
 🔹 Buscar moto por ID
-GET /motos/{id}
+GET http://localhost:8080/index.php/motos
+
 Exemplo: /motos/1
 
 🔹 Atualizar moto existente
-PUT /motos/{id}
+PUT http://localhost:8080/index.php/motos{id}
 
 JSON Exemplo:
 
