@@ -1,86 +1,41 @@
-# COMO USAR?
+Exemplo Prático Simples Docker Composer (Prof Hugo Rafael)
 
-# API de Motos com PHP e Docker
+Agora, dentro da pasta onde está o docker-compose.yml, execute:
 
-Para o professor Hugo, atividade realizada em aula no dia 08/05/2025
+docker-compose up -d
+Isso fará o PHP com Apache e o MySQL subirem juntos!
 
----
+Para testar, acesse no navegador:
+http://localhost:8080/
 
-## Requisitos
+Se tudo estiver certo, você verá a mensagem:
+"Conectado ao MySQL com sucesso!"
 
-- Docker
-- Docker Compose
+Se precisar parar os containers:
 
----
+docker-compose down
 
-## Como rodar o projeto
+---Explicação!---
 
-Clonar o repositório: ->
+./Dockerfile
+Usa a imagem oficial PHP + Apache.
 
-bash
-git clone https://github.com/GuilhermePersch/container_api.git
+Instala a extensão mysqli para conectar ao MySQL.
 
+Copia os arquivos da pasta src/ para dentro do servidor web no container.
 
-Encontrar na pasta:
-cd container2
+Define a porta 80 para o Apache.
 
-Buildar a imagem:
-docker-compose up --build
+./docker-compose.yml
 
-Testar o localhost:
-http://localhost:8080/index.php/motos
+Define dois serviços: php-apache e mysql.
 
-# EndPoints liberados:
+O MySQL cria um banco chamado meu_banco com o usuário e senha definidos.
 
-🔹 Listar todas as motos
-GET http://localhost:8080/index.php/motos
-Retorna todas as motos cadastradas.
+O PHP depende do MySQL (depends_on).
 
-🔹 Cadastrar nova moto
-POST http://localhost:8080/index.php/motos
+Usa volumes para persistir os dados do banco mesmo se o container for removido.
 
-JSON Exemplo:
+Cria uma rede Docker chamada minha-rede para comunicação entre os containers.
 
-json para copiar e editar
-
-
-{
-  "modelo": "CB 500F",
-  "marca": "Honda",
-  "ano": 2021,
-  "preco": 35000
-}
-
-
-🔹 Buscar moto por ID
-GET http://localhost:8080/index.php/motos
-
-Exemplo: http://localhost:8080/index.php/motos/1
-
-🔹 Atualizar moto existente
-PUT http://localhost:8080/index.php/motos{id}
-
-JSON Exemplo:
-
-json para copiar e editar
-{
-  "modelo": "MT-03",
-  "marca": "Yamaha",
-  "ano": 2022,
-  "preco": 30000
-}
-
-
-## Como rodar o banco:
-
-docker ps  -> pegar o id do container MYSQL
-
-docker exec -it container_id bash  -> entrar no container
-
-show databases;
-
-use meu_banco;
-
-show tables;
-
-select * from motos;
+Agora você tem um ambiente PHP + MySQL pronto para desenvolvimento! 
