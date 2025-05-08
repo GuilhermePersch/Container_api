@@ -55,19 +55,32 @@ json para copiar e editar
 🔹 Buscar moto por ID
 GET http://localhost:8080/index.php/motos
 
-Exemplo: /motos/1
+Exemplo: http://localhost:8080/index.php/motos/1
 
 🔹 Atualizar moto existente
 PUT http://localhost:8080/index.php/motos{id}
 
 JSON Exemplo:
 
-json
-Copiar
-Editar
+json para copiar e editar
 {
   "modelo": "MT-03",
   "marca": "Yamaha",
   "ano": 2022,
   "preco": 30000
 }
+
+
+## Como rodar o banco:
+
+docker ps  -> pegar o id do container MYSQL
+
+docker exec -it container_id bash  -> entrar no container
+
+show databases;
+
+use meu_banco;
+
+show tables;
+
+select * from motos;
