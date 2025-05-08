@@ -66,6 +66,7 @@ Retorna uma moto específica.
 bash
 Copiar
 Editar
+
 curl http://localhost:8080/index.php/motos/1
 
 ▶️ POST /motos
@@ -74,8 +75,11 @@ Cria uma nova moto.
 bash
 Copiar
 Editar
+
 curl -X POST http://localhost:8080/index.php/motos
+
 -H "Content-Type: application/json" \
+
 -d '{
   "modelo": "XRE 300",
   "marca": "Honda",
@@ -85,6 +89,7 @@ curl -X POST http://localhost:8080/index.php/motos
 
 
 ▶️ PUT /motos/{id}
+
 Atualiza os dados de uma moto.
 
 bash
@@ -92,7 +97,9 @@ Copiar
 Editar
 
 curl -X PUT http://localhost:8080/index.php/motos/1 \
+
 -H "Content-Type: application/json" \
+
 -d '{
   "modelo": "XRE 300",
   "marca": "Honda",
@@ -102,6 +109,7 @@ curl -X PUT http://localhost:8080/index.php/motos/1 \
 
 
 ▶️ DELETE /motos/{id}
+
 Remove uma moto do banco de dados.
 
 bash
