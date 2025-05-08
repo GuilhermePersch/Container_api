@@ -1,41 +1,125 @@
-Exemplo Prático Simples Docker Composer (Prof Hugo Rafael)
+# Exemplo Prático: API REST de Motos com Docker Compose (Para o Prof. Hugo Rafael)
 
-Agora, dentro da pasta onde está o docker-compose.yml, execute:
+Este projeto demonstra como criar uma API RESTful simples com **PHP (Apache)** e **MySQL** usando **Docker Compose**.
 
-docker-compose up -d
-Isso fará o PHP com Apache e o MySQL subirem juntos!
+Você pode:
+- Criar e acessar um banco de dados MySQL
+- Usar rotas `GET`, `POST`, `PUT` e `DELETE` para gerenciar uma tabela de motos
+- Subir e derrubar os containers facilmente com Docker
 
-Para testar, acesse no navegador:
-http://localhost:8080/
+---
 
-Se tudo estiver certo, você verá a mensagem:
-"Conectado ao MySQL com sucesso!"
+## Pré-requisitos
 
-Se precisar parar os containers:
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
+- Uma ferramenta para testar APIs como [Postman](https://www.postman.com/) ou `curl`
+
+---
+
+## Estrutura do Projeto
+
+meu-projeto/
+│
+├── Dockerfile # Imagem customizada com PHP + Apache
+├── docker-compose.yml # Orquestração dos containers
+└── src/
+└── index.php # Código da API REST
+
+---
+
+## Como Rodar o Projeto
+
+1. Acesse o diretório onde está o `docker-compose.yml`:
+
+cd documents
+cd container2
+docker-compose up ou docker-compose up -d
+
+Acesse navegador ou PostMan por:
+
+http://localhost:8080/index.php/motos
+
+Para parar os containers:
 
 docker-compose down
 
----Explicação!---
 
-./Dockerfile
-Usa a imagem oficial PHP + Apache.
+## Como usar os ENDPOINTS
 
-Instala a extensão mysqli para conectar ao MySQL.
+🧪 API REST: Como Usar
+Todas as requisições devem ser feitas para:
+http://localhost:8080/index.php/motos
 
-Copia os arquivos da pasta src/ para dentro do servidor web no container.
+▶️ GET /motos
+Retorna todas as motos cadastradas.
 
-Define a porta 80 para o Apache.
+bash
+Copiar
+Editar
 
-./docker-compose.yml
+curl http://localhost:8080/index.php/motos
 
-Define dois serviços: php-apache e mysql.
+▶️ GET /motos/{id}
+Retorna uma moto específica.
 
-O MySQL cria um banco chamado meu_banco com o usuário e senha definidos.
+bash
+Copiar
+Editar
+curl http://localhost:8080/index.php/motos/1
 
-O PHP depende do MySQL (depends_on).
+▶️ POST /motos
+Cria uma nova moto.
 
-Usa volumes para persistir os dados do banco mesmo se o container for removido.
+bash
+Copiar
+Editar
+curl -X POST http://localhost:8080/index.php/motos
+-H "Content-Type: application/json" \
+-d '{
+  "modelo": "XRE 300",
+  "marca": "Honda",
+  "ano": 2022,
+  "preco": 21000.50
+}'
 
-Cria uma rede Docker chamada minha-rede para comunicação entre os containers.
 
-Agora você tem um ambiente PHP + MySQL pronto para desenvolvimento! 
+▶️ PUT /motos/{id}
+Atualiza os dados de uma moto.
+
+bash
+Copiar
+Editar
+
+curl -X PUT http://localhost:8080/index.php/motos/1 \
+-H "Content-Type: application/json" \
+-d '{
+  "modelo": "XRE 300",
+  "marca": "Honda",
+  "ano": 2023,
+  "preco": 22000.00
+}'
+
+
+▶️ DELETE /motos/{id}
+Remove uma moto do banco de dados.
+
+bash
+Copiar
+Editar
+
+curl -X DELETE http://localhost:8080/index.php/motos/1
+
+## Testar banco por Terminal:
+
+Entrar no terminal e digitar os seguintes comandos:
+
+docker ps -> Pegar o id do container MYSQL
+docker exec -it (id do container) bash -> usar o id do container
+
+Após isso, usar:
+
+show databases;
+use meu_banco;
+show tables;
+select * from motos;
