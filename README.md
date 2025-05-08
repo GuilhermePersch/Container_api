@@ -17,7 +17,7 @@ Para o professor Hugo, atividade realizada em aula no dia 0
 
 1. Clone o repositório:
 
-```bash
+bash
 git clone https://github.com/GuilhermePersch/container_api.git
 cd seu-repositorio
 
